@@ -1,0 +1,171 @@
+@host = http://localhost
+@port = 3000
+@endpoint= {{host}}:{{port}}
+# @endpoint= http://27.112.79.127
+@company = clupnbgba00002macxbx0zl44
+@place = clus25taf0001qd1squj4suvb
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNsdXBuNm4ycDAwMDBzZWM0Y2U2NG9kMDciLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3MTg1MTk0MTYsImV4cCI6MTcxODUyMzAxNn0.2FHRuBz528lmq5-Mog14aYj32ftr61r3hDdqQBRoGhM
+
+### register employee
+POST {{endpoint}}/api/employee/register
+Content-Type: application/json
+
+{
+    "name": "aliif arief",
+    "email": "me@aliifam.com",
+    "password": "Al1ifam",
+    "confirmPassword": "Al1ifam"
+}
+
+### login employee
+POST {{endpoint}}/api/employee/login
+Content-Type: application/json
+
+{
+    "email": "me@aliifam.com",
+    "password": "Al1ifam"
+}
+
+### get current employee profile
+GET {{endpoint}}/api/employee/profile
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### create new company
+POST {{endpoint}}/api/company
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "name": "PT. Aliifam",
+    "address": "Jl. Aliifam No. 1"
+}
+
+### get all companies
+GET {{endpoint}}/api/company
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### get company by id
+GET {{endpoint}}/api/company/{{company}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### add employee to company
+POST {{endpoint}}/api/company/{{company}}/employee
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "name": "karyawan 1",
+    "email": "k1@aliifam.com",
+    "password": "k1nanJay;",
+    "confirmPassword": "k1nanJay;"
+}
+
+### create place for company
+POST {{endpoint}}/api/company/{{company}}/place
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "name": "Drilling Site 1",
+    "address": "Jl. Gunung Emas No. 1"
+}
+
+### create well for place
+POST {{endpoint}}/api/company/{{company}}/place/{{place}}/well
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "name": "Well 2",
+    "address": "alamat sumur 2"
+}
+
+### get all well
+GET {{endpoint}}/api/company/{{company}}/place/{{place}}/well
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "companyId": "clveoh5qz000039rsi47akr4g",
+    "placeId": "clveoi1db000239rs6ge0w9c9"
+}
+
+### create record for well
+POST {{endpoint}}/api/well
+Content-Type: application/json
+X-Well-Secret-Token: cluumt39j000312u8bg7bcnid
+
+{
+    "date": null,
+    "bitdepth": 1,
+    "scfm": 2,
+    "mudcondin": 3,
+    "mudcondout": 4,
+    "blockpos": 5,
+    "wob": 6,
+    "ropin": 7,
+    "bvdepth": 8,
+    "torque": 9,
+    "rpm": 10,
+    "hkldp": 11,
+    "logdepth": 12,
+    "h2s_1": 13,
+    "mudflowoutp": 14,
+    "totspm": 15,
+    "sppress": 16,
+    "mudflowin": 17,
+    "co2_1": 18,
+    "gas": 19,
+    "mudtempin": 20,
+    "mudtempout": 21,
+    "tankvoltot": 22
+}
+
+### get record from well
+GET {{endpoint}}/api/well/cluumt39j000312u8bg7bcnid
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### get record from well with specific datetime range from 25 april 2024 to 26 april 2024
+GET {{endpoint}}/api/well/cluumt39j000312u8bg7bcnid?from=2021-04-25T00:00:00.000Z&to=2021-04-26T00:00:00.000Z
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### get all well id for ml
+GET {{endpoint}}/api/ml/well
+Content-Type: application/json
+X-Ml-Secret-Token: tokenpenghubungdenganmlyangamatamatrasiharusdijaga
+
+### get record from well for ml
+GET {{endpoint}}/api/ml/well/cluumt39j000312u8bg7bcnid
+Content-Type: application/json
+X-Ml-Secret-Token: tokenpenghubungdenganmlyangamatamatrasiharusdijaga
+
+### ml post notification
+POST {{endpoint}}/api/ml/notification
+Content-Type: application/json
+X-Ml-Secret-Token: tokenpenghubungdenganmlyangamatamatrasiharusdijaga
+
+{
+    "wellId": "cluumt39j000312u8bg7bcnid",
+    "title": "title",
+    "message": "message"
+}
+
+### frontend get notification
+GET {{endpoint}}/api/well/cluumt39j000312u8bg7bcnid/notification
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### frontend set notification read single
+PATCH {{endpoint}}/api/well/cluumt39j000312u8bg7bcnid/notification/clxh5gcyx00016r9kqfeyl6lf/seen
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### frontend set notification read all
+PATCH {{endpoint}}/api/well/cluumt39j000312u8bg7bcnid/notification/seen
+Content-Type: application/json
+Authorization: Bearer {{token}}
